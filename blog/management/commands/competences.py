@@ -91,14 +91,14 @@ def count_v_t(ls):
     for competences in ls:
         vhozhdenie = []
         vhozhdenie.append(vendors_technologies[competences]) 
-    for i in range(28)
+    for i in range(len(vendors_technologies_id))
         count = []
         count.append(vhozhdenie.count(i))
     return count
 
 def list_v_t(count):
     str_v_t
-    for i in range(28):
+    for i in range(len(vendors_technologies_id)):
         if count[i] != 0:
             st = vendors_technologies_id[i]+ ' ' + str(count[i])
             str_v_t.append(st)
