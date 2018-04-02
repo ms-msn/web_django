@@ -29,6 +29,7 @@ class Vacancy(models.Model):
 class Responsibility(models.Model):
     vacancy_id = models.IntegerField(blank=True,null=True)
     name_list = models.TextField(blank=True,null=True)
+    associated = models.TextField(blank=True,null=True)
     description = models.TextField()
 
 
