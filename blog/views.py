@@ -16,10 +16,11 @@ def detail(request, id):
     try:
         vacancy = Vacancy.objects.get(vacancy_id=id)
         competences = Responsibility.objects.filter(vacancy_id=id).first()
-        print(competences.name_list)
+        list_competences = competences.name_list.replace('[','').replace(']','')
+        list_competences = list_competences.split(',')
     except Vacancy.DoesNotExist:
         raise Http404("Vacnacy does not exist")
-    return render(request, 'blog/detail.html', {'vacancy': vacancy, 'competences': competences})
+    return render(request, 'blog/detail.html', {'vacancy': vacancy, 'competences': list_competences})
 
 
 def listing(request):

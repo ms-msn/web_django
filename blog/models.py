@@ -31,6 +31,8 @@ class Responsibility(models.Model):
     name_list = models.TextField(blank=True,null=True)
     description = models.TextField()
 
+
+
 class Requirement(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField()

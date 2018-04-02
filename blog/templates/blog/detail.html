@@ -5,8 +5,12 @@
 <li>{{ vacancy.experience }}</li>
 <li>{{ vacancy.salary_from }}</li>
 <li>{{ vacancy.salary_to }}</li>
+{% autoescape off %}
 <li>{{ vacancy.responsibility }}</li>
+{% endautoescape %}
 <li>{{ vacancy.requirement }}</li>
-<li>{{ competences.name_list }}</li>
+{% for competences_list in competences %}
+<a href=/ ><b>{{ competences_list }}</b>
+{% endfor %}
 </div>
 {% endblock %}
