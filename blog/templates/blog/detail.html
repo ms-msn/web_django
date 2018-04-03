@@ -9,8 +9,16 @@
 <li>{{ vacancy.responsibility }}</li>
 {% endautoescape %}
 <li>{{ vacancy.requirement }}</li>
+<li>
 {% for competences_list in competences %}
-<a href=/ ><b>{{ competences_list }}</b>
+<a href=/ ><b>{{ competences_list }}</b></a>
 {% endfor %}
+</li>
+<li>
+{% for associated_list in associated %}
+<a href="{% url 'blog:vend_teh' associated_list %}">{{ associated_list }}</a>
+{% endfor %}
+</li>
 </div>
 {% endblock %}
+

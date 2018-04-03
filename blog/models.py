@@ -13,25 +13,32 @@ class Hh_vacancy(models.Model):
     responsibility = models.TextField(blank=True,null=True)
     requirement = models.TextField(blank=True,null=True)
     vacancy_id = models.IntegerField(blank=True,null=True)
-    employer_name = models.CharField(max_length=20,blank=True,null=True)
+    employer_name = models.CharField(max_length=30,blank=True,null=True)
     employer_id = models.CharField(max_length=20,blank=True,null=True)
 
 class Vacancy(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     vacancy_id = models.IntegerField(blank=True,null=True)
     salary_from = models.CharField(max_length=20,blank=True,null=True)
     salary_to = models.CharField(max_length=20,blank=True,null=True)
-    name = models.CharField(max_length=20,blank=True,null=True)
+    name = models.CharField(max_length=30,blank=True,null=True)
     responsibility = models.TextField(blank=True,null=True)
     requirement = models.TextField(blank=True,null=True)
     experience = models.CharField(max_length=20,blank=True,null=True)
 
 
 class Responsibility(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     vacancy_id = models.IntegerField(blank=True,null=True)
     name_list = models.TextField(blank=True,null=True)
     associated = models.TextField(blank=True,null=True)
     description = models.TextField()
 
+class Vendors_technologies(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.CharField(max_length=30,blank=True,null=True)
+    full_name = models.CharField(max_length=50,blank=True,null=True)
+    description = models.TextField(blank=True,null=True)
 
 
 class Requirement(models.Model):

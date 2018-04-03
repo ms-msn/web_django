@@ -1,5 +1,6 @@
 from blog.models import Hh_vacancy, Vacancy, Responsibility
 from django.core.management.base import BaseCommand, CommandError
+from django.contrib.auth.models import User
 
 competences = ['OSI',
 'TCP/IP', 'маршрутизация', 'коммутация', 'VPN', 'VLAN', 'DHCP','ESXi',
@@ -26,12 +27,13 @@ competences = ['OSI',
  'PostgreSQL','JS','Битрикс24', 'ITIL', 'Radius', 'DFS', 'Маршрутизаторы', 'управляемые коммутаторы', 'firewall',
  'Veem Backup', 'Acronis Backup Advanced','Администрирование сетевого оборудования', 'FreeBSD', 'CCNA', 'CENT',
  'MongoDB', 'PostgreSQL', 'ISA', 'антивирусная защита', 'MDaemon','SNMP', 'IMAP', 'TMG', 'TS', 'ts', 'MCSA', 'MCP', 'mcp', 'MCSE', 'CCNP',
- 'dba', 'DBA', 'Английский язык', 'Cisco ASA','HPE', 'Asus','iscsi', 'DameWare', 'TeamViewer']
+ 'dba', 'DBA', 'Английский язык', 'Cisco ASA','HPE', 'Asus','iscsi', 'DameWare', 'TeamViewer',
+  'Установка и настройка ПО', 'Диагностика неисправностей']
 
 vendors_technologies = {'OSI': 9,
 'TCP/IP': 9, 'маршрутизация' : 9, 'коммутация' : 9, 'VPN': 9, 'VLAN': 9, 'DHCP': 1,'ESXi': 6,
 'AD': 1, 'terminal services': 1,'Asterisk':14,'CentOS': 8,
-'Hyper-V': 1, 'администрирование IT-инфраструктуры': 1,'интернет': 9, 'телефония':,14
+'Hyper-V': 1, 'администрирование IT-инфраструктуры': 1,'интернет': 9, 'телефония':14,
 'CRM': 11,'Администрирование сайтов': 11,'Postgresql': 8, 'MS SQL': 2,'nix': 8,'Oracle': 26, 'HP': 20, 'Intel': 20,
 'GPO': 1,'DNS': 1, 'RAID': 20,'Symantec Backup': 17,'Active Directory': 1, 'Windows server': 1,
 'АТС': 14,'WI-FI': 9,'postfix': 8, 'asterisk': 14, 'iptables': 8, 'samba': 8, 'zabbix': 15,'Citrix XenApp': 7, 'RouterOS':10,'Cisco IOS': 9,'HelpDesk':21,
@@ -53,24 +55,25 @@ vendors_technologies = {'OSI': 9,
  'PostgreSQL':8,'JS':11,'Битрикс24':13, 'ITIL':27, 'Radius':9, 'DFS':1, 'Маршрутизаторы':9, 'управляемые коммутаторы':9, 'firewall':9,
  'Veem Backup': 17, 'Acronis Backup Advanced':17,'Администрирование сетевого оборудования':9, 'FreeBSD':8, 'CCNA':9, 'CENT':9,
  'MongoDB':8, 'PostgreSQL':8, 'ISA':1, 'антивирусная защита':23, 'MDaemon':8,'SNMP':3, 'IMAP':3, 'TMG':1, 'TS':1, 'ts':1, 'MCSA':1, 'MCP':1, 'mcp':1, 'MCSE':1, 'CCNP':9,
- 'dba':8, 'DBA':8, 'Английский язык':19, 'Cisco ASA':9,'HPE':20, 'Asus':20,'iscsi':1, 'DameWare':21, 'TeamViewer':21
+ 'dba':8, 'DBA':8, 'Английский язык':19, 'Cisco ASA':9,'HPE':20, 'Asus':20,'iscsi':1, 'DameWare':21, 'TeamViewer':21,
+ 'Установка и настройка ПО': 21, 'Диагностика неисправностей' : 21
     }
 
 vendors_technologies_id = { 0: 'Test',
-                         1 : 'MS SERVER',
-                        2 : 'MS SQL',
-                        3 : 'MS Exchange',
-                        4 : 'MS Client',
-                        4 : 'MS SC',
-                        5 : 'MS Scripting',
+                         1 : 'MS_SERVER',
+                        2 : 'MS_SQL',
+                        3 : 'MS_Exchange',
+                        4 : 'MS_Client',
+                        28 : 'MS_SC',
+                        5 : 'MS_Scripting',
                         6 : 'VMWare',
-                        7 : 'Citrix'
-                        8 : 'Linux and Nix',
-                        9 : 'Network Cisco',
-                        10: 'Network Microtik',
+                        7 : 'Citrix',
+                        8 : 'Linux_Nix',
+                        9 : 'Network_Cisco',
+                        10: 'Network_Microtik',
                         11: 'WEB',
                         12: 'Test',
-                        13: '1C'
+                        13: '1C',
                         14: 'VOIP',
                         15: 'Monitoring',
                         16: 'CI/CD',
@@ -88,28 +91,39 @@ vendors_technologies_id = { 0: 'Test',
 }
 
 def count_v_t(ls):
-    for competences in ls:
+    count = []
+    if len(ls) != 0 :
         vhozhdenie = []
-        vhozhdenie.append(vendors_technologies[competences]) 
-    for i in range(len(vendors_technologies_id))
-        count = []
-        count.append(vhozhdenie.count(i))
-    return count
+        for competences in ls:
+            
+            vhozhdenie.append(vendors_technologies[competences]) 
+        
+        for i in range(len(vendors_technologies_id)):
+            
+            count.append(vhozhdenie.count(i))
+        return count
+    else:
+        return count
+
 
 def list_v_t(count):
-    str_v_t
-    for i in range(len(vendors_technologies_id)):
-        if count[i] != 0:
-            st = vendors_technologies_id[i]+ ' ' + str(count[i])
-            str_v_t.append(st)
-    
-
+    str_v_t =[]
+    if len(count) != 0:
+        for i in range(len(vendors_technologies_id)):
+            if count[i] != 0:
+                st = vendors_technologies_id[i] # + ' ' + str(count[i])
+                str_v_t.append(st)
+        return str_v_t
+    else:
+        st = 'Вакансия без техинческих параметров'
+        return st
 
 
 class Command(BaseCommand):
     help = 'competences HH'
 
     def handle(self, *args, **options):
+        me = User.objects.get(username='admin')
         for vac in Vacancy.objects.all():
             list_of_competences=[]
             print(vac.vacancy_id)
@@ -120,9 +134,10 @@ class Command(BaseCommand):
             if not Responsibility.objects.filter(vacancy_id=vac.vacancy_id):
                 Responsibility.objects.create(
                         vacancy_id=vac.vacancy_id,name_list=str(list_of_competences),
-                        associated=str(list_v_t(count_v_t(list_of_competences))) )
+                        associated= ','.join(list_v_t(count_v_t(list_of_competences))))
                 print(list_of_competences)
                 #print(vac.responsibility)
             else:
                 print(list_of_competences)
-                Responsibility.objects.filter(vacancy_id=vac.vacancy_id).update(name_list=list_of_competences,associated=str(list_v_t(count_v_t(list_of_competences))))
+                Responsibility.objects.filter(vacancy_id=vac.vacancy_id).update(name_list=list_of_competences,
+                                            associated=','.join(list_v_t(count_v_t(list_of_competences))))

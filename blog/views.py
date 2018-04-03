@@ -2,7 +2,7 @@ from django.http import HttpResponse, Http404
 from django.template import loader
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Hh_vacancy, Vacancy, Responsibility
+from .models import Hh_vacancy, Vacancy, Responsibility, Vendors_technologies
 
 def index(request):
     latest_vacancy_list = Hh_vacancy.objects.order_by('id')[:100]
@@ -18,9 +18,11 @@ def detail(request, id):
         competences = Responsibility.objects.filter(vacancy_id=id).first()
         list_competences = competences.name_list.replace('[','').replace(']','')
         list_competences = list_competences.split(',')
+        list_associated = competences.associated.split(',')
+
     except Vacancy.DoesNotExist:
         raise Http404("Vacnacy does not exist")
-    return render(request, 'blog/detail.html', {'vacancy': vacancy, 'competences': list_competences})
+    return render(request, 'blog/detail.html', {'vacancy': vacancy, 'competences': list_competences , 'associated': list_associated})
 
 
 def listing(request):
@@ -29,3 +31,10 @@ def listing(request):
     page = request.GET.get('page')
     vacancy_p = paginator.get_page(page)
     return render(request, 'blog/index.html', {'vacancy_p': vacancy_p})
+
+def vend_teh(request, name):
+    try:
+        vendors_technologies = Vendors_technologies.objects.get(name=name)
+    except Vendors_technologies.DoesNotExist:
+        raise Http404("DoesNotExist")
+    return render(request, 'blog/vendor_tehn.html', {'vendors_technologies': vendors_technologies})

@@ -50,7 +50,8 @@ class Command(BaseCommand):
                                 employer_name=(vacancy1.get('employer') or {}).get('id'),
                                 employer_id=vacancy1['employer']['name'])
                     data = getlink(vacancy1['url'], headers, payload={})
-                    Vacancy.objects.create(vacancy_id=vacancy1.get('id'),
+                    Vacancy.objects.create(author=me,
+                                            vacancy_id=vacancy1.get('id'),
                                             salary_from=(data.get('salary') or {}).get('from'),
                                             salary_to=(data.get('salary') or {}).get('to'),
                                             name=data['name'],
