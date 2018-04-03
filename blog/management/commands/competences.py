@@ -1,4 +1,4 @@
-from blog.models import Hh_vacancy, Vacancy, Responsibility
+from blog.models import Hh_vacancy, Vacancy, Responsibility, Vendors_technologies
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 
@@ -58,6 +58,37 @@ vendors_technologies = {'OSI': 9,
  'dba':8, 'DBA':8, 'Английский язык':19, 'Cisco ASA':9,'HPE':20, 'Asus':20,'iscsi':1, 'DameWare':21, 'TeamViewer':21,
  'Установка и настройка ПО': 21, 'Диагностика неисправностей' : 21
     }
+
+vendors_technologies_detail = { 0: ['Test', 'Testtest', 'проверка'],
+                         1 : ['MS_SERVER', 'Microsoft Windows Server', 'Microsoft Windows Server'],
+                        2 : ['MS_SQL', 'Mirosoft Sql Server', 'Mirosoft Sql Server'],
+                        3 : ['MS_Exchange', 'Microsoft Exchange Server' , 'Microsoft Exchange Server'],
+                        4 : ['MS_Client', 'Microsoft Windows', 'Microsoft Windows'],
+                        28 : ['MS_SC', 'Microsoft System Center', 'System Center'],
+                        5 : ['MS_Scripting', 'Microsoft scripting','Microsoft scripting'],
+                        6 : ['VMWare','VMWare','VMWare'],
+                        7 : ['Citrix','Citrix','Citrix'],
+                        8 : ['Linux_Nix','Linux_Nix','Linux_Nix'],
+                        9 : ['Network_Cisco','Network_Cisco','Network_Cisco'],
+                        10: ['Network_Microtik','Network_Microtik','Network_Microtik'],
+                        11: ['WEB', 'WEB','WEB'],
+                        12: ['Test','Test','Test'],
+                        13: ['1C', '1C','1C'],
+                        14: ['VOIP', 'VOIP','VOIP'],
+                        15: ['Monitoring','Monitoring','Monitoring'],
+                        16: ['CI/CD', 'CI/CD','CI/CD'],
+                        17: ['Backup','Backup','Backup'],
+                        18: ['Education','Education','Education'],
+                        19: ['Language', 'Language','Language'],
+                        20: ['Hardware', ,'Hardware', 'Hardware'],
+                        21: ['Helpdesk', 'Helpdesk','Helpdesk'],
+                        22: ['Apple', 'Apple','Apple'],
+                        23: ['Antivirus','Antivirus', 'Antivirus'],
+                        24: ['Linux_Scripting', 'Linux scripting'],
+                        25: ['Kerio', 'Продукты Kerio','Продукты Kerio'],
+                        26: ['Oracle', 'Oracle DB', 'Oracle DB'],
+                        27: ['Other', 'Other','Все что не вошло в остальные группы']
+}
 
 vendors_technologies_id = { 0: 'Test',
                          1 : 'MS_SERVER',
@@ -141,3 +172,19 @@ class Command(BaseCommand):
                 print(list_of_competences)
                 Responsibility.objects.filter(vacancy_id=vac.vacancy_id).update(name_list=list_of_competences,
                                             associated=','.join(list_v_t(count_v_t(list_of_competences))))
+        for i in len(vendors_technologies_detail):
+            if not Vendors_technologies.objects.filter(name=vendors_technologies_detail[i][0]):
+                Vendors_technologies.objects.create(
+                        name=vendors_technologies_detail[i][0],full_name=vendors_technologies_detail[i][1],
+                        description=vendors_technologies_detail[i][2])
+                #print(vac.responsibility)
+            else:
+                Vendors_technologies.filter(name=name=vendors_technologies_detail[i][0]).(
+                        full_name=vendors_technologies_detail[i][1],
+                        description=vendors_technologies_detail[i][2])
+        for key, value in vendors_technologies.items():
+            if not Vendors_technologies_link.objects.filter(name=key):
+                Vendors_technologies_link.objects.create(
+                        name=key,name_vendor_tehn=vendors_technologies_id[value])
+            else:
+                Vendors_technologies_link.filter(name=key).(name_vendor_tehn=name_vendor_tehn=vendors_technologies_id[value])
