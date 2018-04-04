@@ -34,16 +34,18 @@ class Responsibility(models.Model):
     associated = models.TextField(blank=True,null=True)
     description = models.TextField()
 
-class Vendors_technologies_link(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    name = models.CharField(max_length=30,blank=True,null=True)
-    name_vendor_tehn = models.ForeignKey(Vendors_technologies, on_delete=models.CASCADE)
-
 class Vendors_technologies(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=30,blank=True,null=True)
     full_name = models.CharField(max_length=50,blank=True,null=True)
     description = models.TextField(blank=True,null=True)
+
+class Vendors_technologies_link(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.CharField(max_length=30,blank=True,null=True)
+    name_vendor_tehn = models.ForeignKey(Vendors_technologies, on_delete=models.CASCADE , related_name='link')
+
+
 
 
 class Requirement(models.Model):

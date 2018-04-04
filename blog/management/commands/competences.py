@@ -1,4 +1,4 @@
-from blog.models import Hh_vacancy, Vacancy, Responsibility, Vendors_technologies
+from blog.models import Hh_vacancy, Vacancy, Responsibility, Vendors_technologies,Vendors_technologies_link
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 
@@ -80,15 +80,14 @@ vendors_technologies_detail = { 0: ['Test', 'Testtest', 'проверка'],
                         17: ['Backup','Backup','Backup'],
                         18: ['Education','Education','Education'],
                         19: ['Language', 'Language','Language'],
-                        20: ['Hardware', ,'Hardware', 'Hardware'],
+                        20: ['Hardware' ,'Hardware', 'Hardware'],
                         21: ['Helpdesk', 'Helpdesk','Helpdesk'],
                         22: ['Apple', 'Apple','Apple'],
                         23: ['Antivirus','Antivirus', 'Antivirus'],
-                        24: ['Linux_Scripting', 'Linux scripting'],
+                        24: ['Linux_Scripting', 'Linux scripting','Linux scripting'],
                         25: ['Kerio', 'Продукты Kerio','Продукты Kerio'],
                         26: ['Oracle', 'Oracle DB', 'Oracle DB'],
-                        27: ['Other', 'Other','Все что не вошло в остальные группы']
-}
+                        27: ['Other', 'Other','Все что не вошло в остальные группы']}
 
 vendors_technologies_id = { 0: 'Test',
                          1 : 'MS_SERVER',
@@ -163,28 +162,30 @@ class Command(BaseCommand):
                 if exist == True:
                     list_of_competences.append(competences_in)
             if not Responsibility.objects.filter(vacancy_id=vac.vacancy_id):
-                Responsibility.objects.create(
+                Responsibility.objects.create(author=me,
                         vacancy_id=vac.vacancy_id,name_list=str(list_of_competences),
                         associated= ','.join(list_v_t(count_v_t(list_of_competences))))
                 print(list_of_competences)
                 #print(vac.responsibility)
             else:
                 print(list_of_competences)
-                Responsibility.objects.filter(vacancy_id=vac.vacancy_id).update(name_list=list_of_competences,
+                Responsibility.objects.filter(vacancy_id=vac.vacancy_id).update(name_list=list_of_competences,author=me,
                                             associated=','.join(list_v_t(count_v_t(list_of_competences))))
-        for i in len(vendors_technologies_detail):
+        for i in range(len(vendors_technologies_detail)):
             if not Vendors_technologies.objects.filter(name=vendors_technologies_detail[i][0]):
-                Vendors_technologies.objects.create(
+                print(vendors_technologies_detail[i][2])
+                Vendors_technologies.objects.create(author=me,
                         name=vendors_technologies_detail[i][0],full_name=vendors_technologies_detail[i][1],
                         description=vendors_technologies_detail[i][2])
                 #print(vac.responsibility)
             else:
-                Vendors_technologies.filter(name=name=vendors_technologies_detail[i][0]).(
-                        full_name=vendors_technologies_detail[i][1],
-                        description=vendors_technologies_detail[i][2])
+                Vendors_technologies.objects.filter(name=vendors_technologies_detail[i][0]).update(full_name=vendors_technologies_detail[i][1],author=me,
+                    description=vendors_technologies_detail[i][2])
         for key, value in vendors_technologies.items():
+            name_vendor_tehn = Vendors_technologies.objects.filter(name=vendors_technologies_id[value])[0]
             if not Vendors_technologies_link.objects.filter(name=key):
                 Vendors_technologies_link.objects.create(
-                        name=key,name_vendor_tehn=vendors_technologies_id[value])
+                        name=key,name_vendor_tehn=name_vendor_tehn,author=me)
             else:
-                Vendors_technologies_link.filter(name=key).(name_vendor_tehn=name_vendor_tehn=vendors_technologies_id[value])
+                Vendors_technologies_link.filter(name=key).update(author=me,
+                 name_vendor_tehn=name_vendor_tehn)
