@@ -19,10 +19,10 @@ def detail(request, id):
         list_competences = competences.name_list.replace('[','').replace(']','')
         list_competences = list_competences.split(',')
         list_associated = competences.associated.split(',')
-
+        vend_tehn = Vendors_technologies.objects.filter(name__in=[associated for associated in list_associated])
     except Vacancy.DoesNotExist:
         raise Http404("Vacnacy does not exist")
-    return render(request, 'blog/detail.html', {'vacancy': vacancy, 'competences': list_competences , 'associated': list_associated})
+    return render(request, 'blog/detail.html', {'vacancy': vacancy, 'competences': list_competences , 'associated' : vend_tehn })
 
 
 def listing(request):

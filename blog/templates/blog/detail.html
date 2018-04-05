@@ -16,7 +16,7 @@
 </li>
 <li>
 {% for associated_list in associated %}
-<a href="{% url 'blog:vend_teh' associated_list %}">{{ associated_list }}</a>
+<a href="{% url 'blog:vend_teh' associated_list.name %}">{{ associated_list.full_name }}</a>
 {% endfor %}
 </li>
 </div>

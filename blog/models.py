@@ -16,6 +16,9 @@ class Hh_vacancy(models.Model):
     employer_name = models.CharField(max_length=30,blank=True,null=True)
     employer_id = models.CharField(max_length=20,blank=True,null=True)
 
+    def __str__(self):
+        return self.name + str(self.vacancy_id)
+
 class Vacancy(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     vacancy_id = models.IntegerField(blank=True,null=True)
@@ -26,6 +29,8 @@ class Vacancy(models.Model):
     requirement = models.TextField(blank=True,null=True)
     experience = models.CharField(max_length=20,blank=True,null=True)
 
+    def __str__(self):
+        return self.name + str(self.vacancy_id)
 
 class Responsibility(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -34,18 +39,25 @@ class Responsibility(models.Model):
     associated = models.TextField(blank=True,null=True)
     description = models.TextField()
 
+    def __str__(self):
+        return self.vacancy_id
+
 class Vendors_technologies(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=30,blank=True,null=True)
     full_name = models.CharField(max_length=50,blank=True,null=True)
     description = models.TextField(blank=True,null=True)
 
+    def __str__(self):
+        return self.full_name
+
 class Vendors_technologies_link(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=30,blank=True,null=True)
     name_vendor_tehn = models.ForeignKey(Vendors_technologies, on_delete=models.CASCADE , related_name='link')
 
-
+    def __str__(self):
+        return self.name
 
 
 class Requirement(models.Model):
