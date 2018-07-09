@@ -1,24 +1,36 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 <div class="post">
-<li><h1>{{ vacancy.name }}</h1></li>
-<li>{{ vacancy.experience }}</li>
-<li>{{ vacancy.salary_from }}</li>
-<li>{{ vacancy.salary_to }}</li>
+<h2>{{ vacancy.name }}</h2>
+Требуемый опыт {{ vacancy.experience }}
+</br>
+Оплата от {{ vacancy.salary_from }} руб
+до {{ vacancy.salary_to }} руб
+<br>
+<br>
 {% autoescape off %}
-<li>{{ vacancy.responsibility }}</li>
+{{ vacancy.responsibility }}
 {% endautoescape %}
-<li>{{ vacancy.requirement }}</li>
-<li>
+<b>Ключевые навыки по мнение работодателя:</b>
+<{{ vacancy.requirement }}
+</br>
+</br>
+<h2>Анализ вакансии и поиск ключевых слов</h2>
+
+<b>Найденные ключевые слова:</b>
 {% for competences_list in competences %}
-<a href=/ ><b>{{ competences_list }}</b></a>
+<a href=/ class="button primary small"><b>{{ competences_list }}</b></a>
 {% endfor %}
-</li>
-<li>
+</br>
+</br>
+<b>Связанные сущности:</b>
 {% for associated_list in associated %}
-<a href="{% url 'blog:vend_teh' associated_list.name %}">{{ associated_list.full_name }}</a>
+<a href="{% url 'blog:vend_teh' associated_list.name %}" class="button">{{ associated_list.full_name }}</a>
 {% endfor %}
-</li>
+</br>
+</br>
+<h2>Примерная оценка стоимости и времени подготовки сутрудника обладающего данными навыками</h2>
+<h2>График соответсвия уровню зарплат подобных сотрудников:</h2>
 </div>
 {% endblock %}
 

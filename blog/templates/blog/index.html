@@ -1,18 +1,78 @@
-
 {% extends 'blog/base.html' %}
-{% block content %}
-{% if vacancy_p %}
-    <ul>
-    {% for vacancy in vacancy_p %}
-    <div class='post'>
-        <li><h1><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}</a></h1></li>
-        <li>{{ vacancy.responsibility }}</li>
-        <li>{{ vacancy.requirement }}</li>
-    </div>  
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p>No blog are available.</p>
-{% endif %}
-{% endblock %}
- 
+{% block content %}                                
+                                    <section id="banner">
+                                    <div class="content">
+                                        <header>
+                                            <h1>Привет, это проект Admin-union<br />
+                                            </h1>
+                                            <p>Работа мечты</p>
+                                        </header>
+                                        <p>Всем привет это проект ацуацуацуацуауцауцацуацуацуауац</p>
+                                        <ul class="actions">
+                                            <li><a href="#" class="button big">Подробнее</a></li>
+                                        </ul>
+                                    </div>
+                                    <span class="image object">
+                                        <img src="blog/static/blog/images/pic10.jpg" alt="" />
+                                    </span>
+                                </section>
+                                <section>
+                                    <header class="major">
+                                        <h2>Актуальное о проекте</h2>
+                                    </header>
+                                    <div class="features">
+                                        <article>
+                                            <span class="icon fa-diamond"></span>
+                                            <div class="content">
+                                                <h3>Объединение</h3>
+                                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                                            </div>
+                                        </article>
+                                        <article>
+                                            <span class="icon fa-paper-plane"></span>
+                                            <div class="content">
+                                                <h3>Полет мысли</h3>
+                                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                                            </div>
+                                        </article>
+                                        <article>
+                                            <span class="icon fa-rocket"></span>
+                                            <div class="content">
+                                                <h3>Актуальные направления развитя</h3>
+                                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                                            </div>
+                                        </article>
+                                        <article>
+                                            <span class="icon fa-signal"></span>
+                                            <div class="content">
+                                                <h3>Аналитика рынка труда</h3>
+                                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+
+                            <!-- Section -->
+                                <section>
+                                    <header class="major">
+                                        <h2>Вакансии системных администраторов</h2>
+                                    </header>
+                                    <div class="posts">
+                                        {% for vacancy in vacancy_p %}
+                                        <article>
+                                            <a href="#" class="image"><img src="blog/static/blog/images/pic01.jpg" alt="" /></a>
+                                            <h3><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}</a></h3>
+                                            {% autoescape off %}
+                                            {{ vacancy.responsibility }}
+                                        </br>
+
+                                            {{ vacancy.requirement }}
+                                            {% endautoescape %}
+                                            <ul class="actions">
+                                                <li><a href="{% url 'blog:detail' vacancy.vacancy_id %}" class="button">Подробнее</a></li>
+                                            </ul>
+                                        </article>
+                                        {% endfor %}
+                                    </div>
+                                </section>
+{% endblock %} 

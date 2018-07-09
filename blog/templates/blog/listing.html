@@ -1,0 +1,22 @@
+{% extends 'blog/base1.html' %}
+{% block content %}
+
+                                <section>
+                                    <header class="major">
+                                        <h2>Вакансии системных администраторов</h2>
+                                    </header>
+                                    <div class="posts">
+                                        {% for vacancy in vacancy_p %}
+                                        <article>
+                                            <h3><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}</a></h1>
+                                            <li>{{ vacancy.responsibility }}</li>
+                                            <li>{{ vacancy.requirement }}</li>
+                                            <ul class="actions">
+                                                <li><a href="#" class="button">Подробнее</a></li>
+                                            </ul>
+                                        </article>
+                                        {% endfor %}
+                                    </div>
+                                </section>
+
+{% endblock %}

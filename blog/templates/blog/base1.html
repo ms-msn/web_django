@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title>Admin-Union</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}" />
+    </head>
+    <body class="is-preload">
+
+        <!-- Wrapper -->
+            <div id="wrapper">
+
+                <!-- Main -->
+                    <div id="main">
+                        <div class="inner">
+
+                            <!-- Header -->
+                                <header id="header">
+                                    <a href="" class="logo"><strong>Admin-Union</strong></a>
+                                    <ul class="icons">
+                                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                    </ul>
+                                </header>
+                        
+
+
+            {% block content %}
+            {% endblock %}
+<ul class="pagination">
+            {% if vacancy_p.has_previous %}
+            <li><a href="?page=1" class="button">first</a></li>
+            <li><a href="?page={{ vacancy_p.previous_page_number }}" class="button">previous</a><li>
+            {% endif %}
+             <li><a href="?page={{ vacancy_p.number }}" class="page active">{{ vacancy_p.number }}</a></li>
+            <li><span>&hellip;</span></li>
+            <li><a href="?page={{ vacancy_p.paginator.num_pages }}" class="page">{{ vacancy_p.paginator.num_pages }}</a></li>
+            {% if vacancy_p.has_next %}
+            <li><a href="?page={{ vacancy_p.next_page_number }}" class="button">next</a></li>
+            <li><a href="?page={{ vacancy_p.paginator.num_pages }}" class="button">last</a></li>
+            {% endif %}
+</ul>
+
+                        </div>
+                    </div>
+
+                <!-- Sidebar -->
+                    <div id="sidebar">
+                        <div class="inner">
+
+                            <!-- Search -->
+                                <section id="search" class="alt">
+                                    <form method="post" action="#">
+                                        <input type="text" name="query" id="query" placeholder="Search" />
+                                    </form>
+                                </section>
+
+                            <!-- Menu -->
+                                <nav id="menu">
+                                    <header class="major">
+                                        <h2>Menu</h2>
+                                    </header>
+                                    <ul>
+                                        <li><a href="">Главная страница</a></li>
+                                        <li><a href="generic.html">О проекте</a></li>
+                                        <li><a href="elements.html">Цели и задачи</a></li>
+                                        <li><a href="#">История возникновения</a></li>
+                                        <li><a href="/listing">Ваканисии</a></li>
+                                        <li>
+                                            <span class="opener">Аналитика рынка труда</span>
+                                            <ul>
+                                                <li><a href="#">Графики</a></li>
+                                                <li><a href="#">Тренды</a></li>
+                                                <li><a href="#">Зарплаты</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Статьи</a></li>
+                                        <li><a href="#">Направления развитя</a></li>
+                                        <li><a href="#">Вендоры</a></li>
+                                    </ul>
+                                </nav>
+
+
+                            <!-- Section -->
+                                <section>
+                                    <header class="major">
+                                        <h2>Для связи</h2>
+                                    </header>
+                                    <p>Проект развивается и будет рад всяческой поддержке.</p>
+                                    <ul class="contact">
+                                        <li class="fa-envelope-o"><a href="#">info@admin-union.ru</a></li>
+
+                                    </ul>
+                                </section>
+
+                            <!-- Footer -->
+                                <footer id="footer">
+                                    <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                                </footer>
+
+                        </div>
+                    </div>
+
+            </div>
+
+        <!-- Scripts -->
+            <script src="{% static 'blog/js/jquery.min.js' %}"></script>
+            <script src="{% static 'blog/js/browser.min.js' %}"></script>
+            <script src="{% static 'blog/js/breakpoints.min.js' %}"></script>
+            <script src="{% static 'blog/js/util.js' %}"></script>
+            <script src="{% static 'blog/js/main.js' %}"></script>
+
+    </body>
+</html>
+
+
+
+</body>
+</html>
