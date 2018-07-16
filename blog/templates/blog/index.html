@@ -3,13 +3,13 @@
                                     <section id="banner">
                                     <div class="content">
                                         <header>
-                                            <h1>Привет, это проект Admin-union<br />
+                                            <h1>Привет, это проект Admin-Union<br/>
                                             </h1>
                                             <p>Работа мечты</p>
                                         </header>
                                         <p>Всем привет это проект ацуацуацуацуауцауцацуацуацуауац</p>
                                         <ul class="actions">
-                                            <li><a href="#" class="button big">Подробнее</a></li>
+                                            <li><a href="{% url 'blog:basic' pk='1' %}" class="button big">Подробнее</a></li>
                                         </ul>
                                     </div>
                                     <span class="image object">
@@ -61,7 +61,7 @@
                                         {% for vacancy in vacancy_p %}
                                         <article>
                                             <a href="#" class="image"><img src="blog/static/blog/images/pic01.jpg" alt="" /></a>
-                                            <h3><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}</a></h3>
+                                            <h3><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}.{{ vacancy.employer_id }}</a></h3>
                                             {% autoescape off %}
                                             {{ vacancy.responsibility }}
                                         </br>

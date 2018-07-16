@@ -8,11 +8,15 @@
                                     <div class="posts">
                                         {% for vacancy in vacancy_p %}
                                         <article>
-                                            <h3><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}</a></h1>
-                                            <li>{{ vacancy.responsibility }}</li>
-                                            <li>{{ vacancy.requirement }}</li>
+                                            <a href="#" class="image"><img src="blog/static/blog/images/pic01.jpg" alt="" /></a>
+                                            <h3><a href="{% url 'blog:detail' vacancy.vacancy_id %}">{{ vacancy.name }}.{{ vacancy.employer_id }}</a></h3>
+                                            {% autoescape off %}
+                                            {{ vacancy.responsibility }}
+                                            </br>
+                                            {{ vacancy.requirement }}
+                                            {% endautoescape %}
                                             <ul class="actions">
-                                                <li><a href="#" class="button">Подробнее</a></li>
+                                                <li><a href="{% url 'blog:detail' vacancy.vacancy_id %}" class="button">Подробнее</a></li>
                                             </ul>
                                         </article>
                                         {% endfor %}

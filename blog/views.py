@@ -1,12 +1,15 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
+from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Hh_vacancy, Vacancy, Responsibility, Vendors_technologies
+from .models import Hh_vacancy, Vacancy, Responsibility, Vendors_technologies, Post,Basic
 
 def index(request):
     vacancy_p = Hh_vacancy.objects.order_by('id')[:6]
-    return render(request, 'blog/index.html', {'vacancy_p': vacancy_p})
+    post = Post.objects.order_by('id')[:3]
+    return render(request, 'blog/index.html', {'vacancy_p': vacancy_p,'post': post})
+
 
 def detail(request, id):
     try:
@@ -34,3 +37,15 @@ def vend_teh(request, name):
     except Vendors_technologies.DoesNotExist:
         raise Http404("DoesNotExist")
     return render(request, 'blog/vendor_tehn.html', {'vendors_technologies': vendors_technologies})
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+def detail_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/detail_post.html', {'post': post})
+
+def basic(request, pk):
+    basic = get_object_or_404(Basic, pk=pk)
+    return render(request, 'blog/basic_detail.html', {'basic': basic})

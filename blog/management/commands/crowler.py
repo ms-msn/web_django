@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
         null = None
         headers={'User-Agent': 'api-test-agent'}
-        key = 'ILSD9A9KV16UCJITR3O7IF843LIPPTUC6AGGQAR389LG0EA83PDMQTQK2HD7DJE6'
+        key = 'J43OIJTMROF74FTJUC2PSJC7LFH7EO8FIQ0NAJQBKTG9BH6GQSTIPF03UE64FG3I'
         link = 'https://api.hh.ru/vacancies'
         au = 'Bearer ' + key
         headers['Authorization'] = au

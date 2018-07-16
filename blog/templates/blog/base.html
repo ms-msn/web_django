@@ -14,7 +14,6 @@
 		<link rel="stylesheet" href="{% static 'blog/css/main.css' %}" />
 	</head>
 	<body class="is-preload">
-S
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -24,9 +23,9 @@ S
 
 							<!-- Header -->
 								<header id="header">
-									<a href="{% url 'blog:index' %}" class="logo"><h2><strong>Admin-Union</strong></h1></a>
+									<a href="{% url 'blog:index' %}" class="logo"><h2><strong>Admin-Union</strong></h2></a>
 									<ul class="icons">
-										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.facebook.com/groups/199943707344546" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 									</ul>
 								</header>
 						
@@ -56,10 +55,10 @@ S
 									</header>
 									<ul>
 										<li><a href="{% url 'blog:index' %}">Главная страница</a></li>
-										<li><a href="generic.html">О проекте</a></li>
-										<li><a href="elements.html">Цели и задачи</a></li>
-										<li><a href="#">История возникновения</a></li>
-										<li><a href="{% url 'blog:listing' %}">Ваканисии</a></li>
+										<li><a href="{% url 'blog:basic' pk='1' %}">О проекте</a></li>
+										<li><a href="{% url 'blog:basic' pk='2' %}">Цели и задачи</a></li>
+										<li><a href="{% url 'blog:basic' pk='3' %}">История возникновения</a></li>
+										<li><a href="{% url 'blog:listing' %}">Ваканисии и их анализ</a></li>
 										<li>
 											<span class="opener">Аналитика рынка труда</span>
 											<ul>
@@ -69,13 +68,30 @@ S
 												
 											</ul>
 										</li>
-										<li><a href="#">Статьи</a></li>
-										<li><a href="#">Направления развитя</a></li>
-										<li><a href="#">Вендоры</a></li>
+										<li><a href="{% url 'blog:post_list' %}">Статьи</a></li>
+										<li><a href="{% url 'blog:basic' pk=4 %}">Направления развития</a></li>
+										<li><a href="#">Вендоры и их курсы</a></li>
 									</ul>
 								</nav>
 
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Последнии статьи</h2>
+									</header>
+									<div class="mini-posts">
+										{% for post1 in post %}
+										<article>
+											<<h3><a href="{% url 'blog:detail_post' pk=post1.pk %}">{{ post1.title }}</a></h3>
+										</article>
+										{% endfor %}
+									</div>
+									<ul class="actions">
+										<li><a href="{% url 'blog:post_list' %}" class="button">Подробнее</a></li>
+									</ul>
+								</section>
 
+							<!-- Section -->
 							<!-- Section -->
 								<section>
 									<header class="major">
