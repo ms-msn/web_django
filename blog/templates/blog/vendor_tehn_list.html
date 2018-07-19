@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+                                <section>
+                                    <header class="major">
+                                        <h2>Вендоры и курсы</h2>
+                                    </header>
+                                    <div class="posts">
+                                        {% for post in posts %}
+                                        <article>
+                                        <div class="post">
+                                        <h2><a href="{% url 'blog:vend_teh' post.name %}">{{ post.full_name }}</a></h2>
+                                        </article>
+                                        {% endfor %}
+                                    </div>
+                                </section>
+
+{% endblock %}

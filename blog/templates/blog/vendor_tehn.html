@@ -2,8 +2,9 @@
 {% block content %}
 <div class="post">
     {% autoescape off %}
-<li><h1>{{ vendors_technologies.full_name }}</h1></li>
-<li>{{ vendors_technologies.description }}</li>
+<h2>{{ vendors_technologies.full_name }}</h2>
+</br>
+{{ vendors_technologies.description }}
 {% endautoescape %}
 </div>
 {% endblock %}

@@ -49,3 +49,7 @@ def detail_post(request, pk):
 def basic(request, pk):
     basic = get_object_or_404(Basic, pk=pk)
     return render(request, 'blog/basic_detail.html', {'basic': basic})
+
+def vend_teh_list(request):
+    posts = Vendors_technologies.objects.all()
+    return render(request, 'blog/vendor_tehn_list.html', {'posts': posts})
